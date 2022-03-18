@@ -4,18 +4,18 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FakeBookRepository implements BookRepository {
+public class FakeFBookRepository implements FBookRepository {
 
     //in memory database, hashmap or list
-    Map<String, Book> bookStore = new HashMap<>();
+    Map<String, FBook> bookStore = new HashMap<>();
 
     @Override
-    public void save(Book book) {
-        bookStore.put(book.getBookId(), book);
+    public void save(FBook FBook) {
+        bookStore.put(FBook.getBookId(), FBook);
     }
 
     @Override
-    public Collection<Book> findAll() {
+    public Collection<FBook> findAll() {
         return bookStore.values();
     }
 }

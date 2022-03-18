@@ -1,14 +1,14 @@
-package dmitr2ish.com.github.mockito.test_doubles.fake;
+package dmitr2ish.com.github.mockito.test_doubles.stub;
 
 import java.time.LocalDate;
 
-public class Book {
+public class SBook {
     private String bookId;
     private String title;
     private int price;
     private LocalDate publishedDate;
 
-    public Book(String bookId, String title, int price, LocalDate publishedDate) {
+    public SBook(String bookId, String title, int price, LocalDate publishedDate) {
         this.bookId = bookId;
         this.title = title;
         this.price = price;
