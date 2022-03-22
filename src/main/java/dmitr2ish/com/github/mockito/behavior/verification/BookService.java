@@ -1,5 +1,7 @@
 package dmitr2ish.com.github.mockito.behavior.verification;
 
+import dmitr2ish.com.github.mockito.stubbing.BookRequest;
+
 public class BookService {
 
     private final BookRepository bookRepository;
@@ -9,6 +11,20 @@ public class BookService {
     }
 
     public void addBook(Book book) {
+        if (book.getPrice() <= 500) {
+            return;
+        }
+        bookRepository.save(book);
+    }
+
+    public void addBook(BookRequest bookRequest) {
+        if (bookRequest.getPrice() <= 500) {
+            return;
+        }
+        Book book = new Book(null
+                , bookRequest.getTitle(),
+                bookRequest.getPrice(),
+                bookRequest.getPublishedDate());
         bookRepository.save(book);
     }
 }

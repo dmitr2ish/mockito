@@ -52,14 +52,16 @@ class BookServiceTest {
         Book book = new Book(null, "Mockito in Action", 500, LocalDate.now());
         doNothing().when(bookRepository).save(book);
         bookService.addBook(book);
+        verify(bookRepository).save(book);
     }
 
     @Test
     void testSaveBookWithBookRequest() {
         BookRequest bookRequest = new BookRequest( "Mockito in Action", 500, LocalDate.now());
         Book book = new Book(null, "Mockito in Action", 500, LocalDate.now());
-        doNothing().when(bookRepository).save(book);
+        //doNothing().when(bookRepository).save(book);
 
         bookService.addBook(bookRequest);
+        verify(bookRepository, times(1)).save(book);
     }
 }
