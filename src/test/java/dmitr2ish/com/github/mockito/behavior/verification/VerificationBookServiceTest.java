@@ -61,4 +61,15 @@ class VerificationBookServiceTest {
         //no interactions with this mock object
         verifyNoInteractions(bookRepository);
     }
+
+    @Test
+    void testUpdatePrice_1() {
+        Book book = new Book("1234", "Mockito in Action", 500, LocalDate.now());
+        when(bookRepository.findBookById("1234")).thenReturn(book);
+        bookService.updatePrice("1234", 500);
+        //check that book really call
+        verify(bookRepository).findBookById("1234");
+        //mean that after last check interactions was not
+        verifyNoMoreInteractions(bookRepository);
+    }
 }
