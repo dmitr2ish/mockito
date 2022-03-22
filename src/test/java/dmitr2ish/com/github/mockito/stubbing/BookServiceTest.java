@@ -62,6 +62,6 @@ class BookServiceTest {
         //doNothing().when(bookRepository).save(book);
 
         bookService.addBook(bookRequest);
-        verify(bookRepository, times(1)).save(book);
+        verify(bookRepository, times(0)).save(book);
     }
 }

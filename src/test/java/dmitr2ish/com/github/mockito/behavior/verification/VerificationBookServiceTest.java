@@ -45,4 +45,13 @@ class VerificationBookServiceTest {
         //times() show how much times call this method, for example if price 500 save was called 0 times
         verify(bookRepository, times(2)).save(book);
     }
+
+    @Test
+    void testSaveBookWithBookRequest_2() {
+        BookRequest bookRequest = new BookRequest( "Mockito in Action", 500, LocalDate.now());
+        Book book = new Book(null, "Mockito in Action", 500, LocalDate.now());
+        bookService.addBook(bookRequest);
+        //never() the same as times(0)
+        verify(bookRepository, never()).save(book);
+    }
 }
