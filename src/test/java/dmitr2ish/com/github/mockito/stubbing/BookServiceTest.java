@@ -27,7 +27,7 @@ class BookServiceTest {
     void testCalculateTotalCostOfBooks() {
         List<String> bookIds = new ArrayList<>();
         bookIds.add("1234");
-        bookIds.add("1235");
+        bookIds.add("1234");
 
         Book book1 = new Book("1234", "Mockito in Action", 500, LocalDate.now());
         Book book2 = new Book("1235", "JUnit in Action", 400, LocalDate.now());
@@ -35,10 +35,15 @@ class BookServiceTest {
 //        when(bookRepository.findBookById("1234")).thenReturn(book1);
 //        when(bookRepository.findBookById("1235")).thenReturn(book2);
 
-        doReturn(book1).when(bookRepository).findBookById("1234");
-        doReturn(book2).when(bookRepository).findBookById("1235");
+//        doReturn(book1).when(bookRepository).findBookById("1234");
+//        doReturn(book2).when(bookRepository).findBookById("1235");
+
+        //more readable variant
+        when(bookRepository.findBookById("1234"))
+                .thenReturn(book1)
+                .thenReturn(book1);
 
         int actualCost = bookService.calculateTotalCost(bookIds);
-        assertEquals(900, actualCost);
+        assertEquals(1000, actualCost);
     }
 }
