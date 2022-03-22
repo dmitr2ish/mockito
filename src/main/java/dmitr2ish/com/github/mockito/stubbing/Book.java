@@ -1,6 +1,7 @@
 package dmitr2ish.com.github.mockito.stubbing;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Book {
     private String bookId;
@@ -45,5 +46,18 @@ public class Book {
 
     public void setPublishedDate(LocalDate publishedDate) {
         this.publishedDate = publishedDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return price == book.price && Objects.equals(title, book.title) && Objects.equals(publishedDate, book.publishedDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, price, publishedDate);
     }
 }

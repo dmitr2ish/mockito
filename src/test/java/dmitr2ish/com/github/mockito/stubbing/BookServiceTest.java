@@ -12,8 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class BookServiceTest {
@@ -45,5 +44,22 @@ class BookServiceTest {
 
         int actualCost = bookService.calculateTotalCost(bookIds);
         assertEquals(1000, actualCost);
+    }
+
+
+    @Test
+    void testSaveBook() {
+        Book book = new Book(null, "Mockito in Action", 500, LocalDate.now());
+        doNothing().when(bookRepository).save(book);
+        bookService.addBook(book);
+    }
+
+    @Test
+    void testSaveBookWithBookRequest() {
+        BookRequest bookRequest = new BookRequest( "Mockito in Action", 500, LocalDate.now());
+        Book book = new Book(null, "Mockito in Action", 500, LocalDate.now());
+        doNothing().when(bookRepository).save(book);
+
+        bookService.addBook(bookRequest);
     }
 }

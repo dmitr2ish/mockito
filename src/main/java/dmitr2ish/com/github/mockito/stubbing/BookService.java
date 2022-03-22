@@ -25,11 +25,23 @@ public class BookService {
     public int calculateTotalCost(List<String> bookIds) {
         int total = 0;
 
-        for(String bookId : bookIds) {
+        for (String bookId : bookIds) {
             Book book = bookRepository.findBookById(bookId);
             total += book.getPrice();
         }
 
         return total;
+    }
+
+    public void addBook(Book book) {
+        bookRepository.save(book);
+    }
+
+    public void addBook(BookRequest bookRequest) {
+        Book book = new Book(null
+                , bookRequest.getTitle(),
+                bookRequest.getPrice(),
+                bookRequest.getPublishedDate());
+        bookRepository.save(book);
     }
 }
