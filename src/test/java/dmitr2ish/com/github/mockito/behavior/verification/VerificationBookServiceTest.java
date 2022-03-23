@@ -74,8 +74,9 @@ class VerificationBookServiceTest {
         bookService.updatePrice("1234", 500);
         //check that book really call
         verify(bookRepository).findBookById("1234");
+        verify(bookRepository).save(book);
         //mean that after last check interactions was not
-        //verifyNoMoreInteractions(bookRepository);
+        verifyNoMoreInteractions(bookRepository);
     }
 
     @Test
