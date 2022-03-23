@@ -3,6 +3,7 @@ package dmitr2ish.com.github.mockito.behavior.verification;
 import dmitr2ish.com.github.mockito.stubbing.BookRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -71,5 +72,19 @@ class VerificationBookServiceTest {
         verify(bookRepository).findBookById("1234");
         //mean that after last check interactions was not
         verifyNoMoreInteractions(bookRepository);
+    }
+
+    @Test
+    void testUpdatePrice_2() {
+        Book book = new Book("1234", "Mockito in Action", 500, LocalDate.now());
+        when(bookRepository.findBookById("1234")).thenReturn(book);
+        bookService.updatePrice("1234", 500);
+
+        //allow setting order of checks
+        InOrder inOrder = inOrder(bookRepository);
+
+        //check that book really call
+        inOrder.verify(bookRepository).findBookById("1234");
+        inOrder.verify(bookRepository).save(book);
     }
 }
