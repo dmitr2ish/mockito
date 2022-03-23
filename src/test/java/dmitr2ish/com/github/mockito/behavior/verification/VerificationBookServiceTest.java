@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
@@ -18,12 +19,15 @@ class VerificationBookServiceTest {
     @InjectMocks
     private BookService bookService;
 
-    @Mock
+//    @Mock
+//    private BookRepository bookRepository;
+
+    @Spy
     private BookRepository bookRepository;
 
     @Test
     void testSaveBook() {
-        Book book = new Book(null, "Mockito in Action", 500, LocalDate.now());
+        Book book = new Book(null, "Mockito in Action", 600, LocalDate.now());
         bookService.addBook(book);
         verify(bookRepository).save(book);
     }
@@ -71,7 +75,7 @@ class VerificationBookServiceTest {
         //check that book really call
         verify(bookRepository).findBookById("1234");
         //mean that after last check interactions was not
-        verifyNoMoreInteractions(bookRepository);
+        //verifyNoMoreInteractions(bookRepository);
     }
 
     @Test
