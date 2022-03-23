@@ -25,4 +25,13 @@ public class BookService {
         }
         return totalPrice;
     }
+
+    public void addBook(Book book) {
+        try {
+            bookRepository.save(book);
+        } catch (SQLException e) {
+            //log exception
+            throw new DatabaseWriteException("Unable to write to database duo to - " + e.getMessage());
+        }
+    }
 }
