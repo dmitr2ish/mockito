@@ -6,10 +6,7 @@ import dmitr2ish.com.github.mockito.argument_captor.BookService;
 import dmitr2ish.com.github.mockito.stubbing.BookRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.InOrder;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
@@ -25,6 +22,8 @@ class BookServiceTest {
     @Mock
     private BookRepository bookRepository;
 
+    @Captor
+    private ArgumentCaptor<Book> bookArgumentCaptor;
 
     @Test
     void testSaveBook() {
