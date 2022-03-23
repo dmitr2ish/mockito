@@ -8,4 +8,6 @@ public interface BookRepository {
     Book findBookById(String bookId);
 
     Book findBookByTitleAndPublishedDate(String title, LocalDate localDate);
+
+    Book findBookByTitleAndPriceAndIsDigital(String title, int price, boolean isDigital);
 }

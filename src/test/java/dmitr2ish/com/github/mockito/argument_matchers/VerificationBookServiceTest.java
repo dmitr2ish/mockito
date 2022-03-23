@@ -11,8 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -37,9 +36,11 @@ class VerificationBookServiceTest {
         verify(bookRepository).save(book2);
     }
 
+    // Argument Matchers should be provided for all arguments
+    // Argument matchers cant be used outside stubbing/verification
     @Test
     void testInvalidUseOfArgumentMatchers() {
-        Book book = new Book("1234", "Mockito in Action", 600, LocalDate.now());
+                Book book = new Book("1234", "Mockito in Action", 600, LocalDate.now());
         //eq() -  argument matcher
         when(bookRepository.findBookByTitleAndPublishedDate(eq("Mockito in Action"), any())).thenReturn(book);
         Book actualBook = bookService.getBookByTitleAndPublishedDate("Mockito in Action", LocalDate.now());
@@ -47,6 +48,12 @@ class VerificationBookServiceTest {
 
     }
 
-    // Argument Matchers should be provided for all arguments
-    // Argument matchers cant be used outside stubbing/verification
+    @Test
+    void testSpecificTypeOfArgumentMatchers() {
+        Book book = new Book("1234", "Mockito in Action", 600, LocalDate.now());
+        when(bookRepository.findBookByTitleAndPriceAndIsDigital(anyString(), anyInt(), anyBoolean())).thenReturn(book);
+        Book actualBook = bookService.getBookByTitleAndPriceAndIsDigital("Mockito in Action", 600, true);
+        assertEquals("Mockito in Action", actualBook.getTitle());
+
+    }
 }
