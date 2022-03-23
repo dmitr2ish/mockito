@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -24,6 +25,14 @@ class ExceptionBookServiceTest {
     void testTotalPriceOfBooks() throws SQLException {
         //init throw exception
         when(bookRepository.findAllBooks()).thenThrow(SQLException.class);
+        assertThrows(DatabaseReadException.class, () -> bookService.getTotalPriceOfBooks());
+    }
+
+    @Test
+    void testTotalPriceOfBooks_3() throws SQLException {
+        //init throw exception
+        //when(bookRepository.findAllBooks()).thenThrow(SQLException.class);
+        given(bookRepository.findAllBooks()).willThrow(SQLException.class);
         assertThrows(DatabaseReadException.class, () -> bookService.getTotalPriceOfBooks());
     }
 
