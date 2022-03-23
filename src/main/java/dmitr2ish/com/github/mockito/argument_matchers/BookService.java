@@ -3,6 +3,7 @@ package dmitr2ish.com.github.mockito.argument_matchers;
 import dmitr2ish.com.github.mockito.stubbing.BookRequest;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class BookService {
 
@@ -12,11 +13,8 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
-    public void addBook(Book book) {
-        if (book.getPrice() <= 500) {
-            return;
-        }
-        bookRepository.save(book);
+    public void addBook(List<Book> books) {
+        bookRepository.saveAll(books);
     }
 
     public void addBook(BookRequest bookRequest) {
