@@ -87,4 +87,18 @@ class VerificationBookServiceTest {
         inOrder.verify(bookRepository).findBookById("1234");
         inOrder.verify(bookRepository).save(book);
     }
+
+    @Test
+    void testSaveBookWithBookRequest_3() {
+        BookRequest bookRequest = new BookRequest("Mockito in Action", 600, LocalDate.now());
+        Book book = new Book(null, "Mockito in Action", 600, LocalDate.now());
+        bookService.addBook(bookRequest);
+        bookService.addBook(bookRequest);
+        //times() show how much times call this method, for example if price 500 save was called 0 times
+        //verify(bookRepository, times(2)).save(book);
+        //atLeast() - minimal count of calling, atMost() -maximum,
+        // atMostOnce() - not more than 1, atLeatOnce() - not less than 1
+        verify(bookRepository, atLeast(1)).save(book);
+        verify(bookRepository, atMost(2)).save(book);
+    }
 }
