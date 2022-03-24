@@ -67,4 +67,11 @@ class VerificationBookServiceTest {
         verify(bookRepository).saveAll(anyList());
     }
 
+    @Test
+    void testStringTypeOfArgumentMatchers() {
+        Book book = new Book("1234", "Mockito in Action", 600, LocalDate.now());
+        when(bookRepository.findBookByTitleAndPriceAndIsDigital(startsWith("Mockito"), anyInt(), anyBoolean())).thenReturn(book);
+        Book actualBook = bookService.getBookByTitleAndPriceAndIsDigital("Mockito in Action", 600, true);
+        assertEquals("Mockito in Action", actualBook.getTitle());
+    }
 }

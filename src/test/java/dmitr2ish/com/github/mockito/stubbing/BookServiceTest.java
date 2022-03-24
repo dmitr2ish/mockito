@@ -24,32 +24,32 @@ class BookServiceTest {
 
     @Test
     void testCalculateTotalCostOfBooks() {
-        List<String> bookIds = new ArrayList<>();
-        bookIds.add("1234");
-        bookIds.add("1234");
+        List<String> books = new ArrayList<>();
+        books.add("1234");
+        books.add("1235");
 
         Book book1 = new Book("1234", "Mockito in Action", 500, LocalDate.now());
         Book book2 = new Book("1235", "JUnit in Action", 400, LocalDate.now());
 
-//        when(bookRepository.findBookById("1234")).thenReturn(book1);
-//        when(bookRepository.findBookById("1235")).thenReturn(book2);
+        when(bookRepository.findBookById("1234")).thenReturn(book1);
+        when(bookRepository.findBookById("1235")).thenReturn(book2);
 
 //        doReturn(book1).when(bookRepository).findBookById("1234");
-//        doReturn(book2).when(bookRepository).findBookById("1235");
 
         //more readable variant
-        when(bookRepository.findBookById("1234"))
-                .thenReturn(book1)
-                .thenReturn(book1);
+//        when(bookRepository.findBookById("1234"))
+//                .thenReturn(book1)
+//                .thenReturn(book1);
 
-        int actualCost = bookService.calculateTotalCost(bookIds);
-        assertEquals(1000, actualCost);
+        int actualCost = bookService.calculateTotalCost(books);
+        assertEquals(900, actualCost);
     }
 
 
     @Test
     void testSaveBook() {
         Book book = new Book(null, "Mockito in Action", 500, LocalDate.now());
+        //when you use void method you can use doNothing
         doNothing().when(bookRepository).save(book);
         bookService.addBook(book);
         verify(bookRepository).save(book);

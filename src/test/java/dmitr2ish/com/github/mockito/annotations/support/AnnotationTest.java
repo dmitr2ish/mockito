@@ -1,6 +1,5 @@
 package dmitr2ish.com.github.mockito.annotations.support;
 
-import dmitr2ish.com.github.mockito.stubbing.Book;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

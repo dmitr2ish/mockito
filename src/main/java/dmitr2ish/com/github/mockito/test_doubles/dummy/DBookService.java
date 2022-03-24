@@ -2,20 +2,20 @@ package dmitr2ish.com.github.mockito.test_doubles.dummy;
 
 public class DBookService {
 
-    private DBookRepository DBookRepository;
-    private EmailService emailService;
+    private final DBookRepository bookRepository;
+    private final EmailService emailService;
 
-    public DBookService(DBookRepository DBookRepository, EmailService emailService) {
-        this.DBookRepository = DBookRepository;
+    public DBookService(DBookRepository bookRepository, EmailService emailService) {
+        this.bookRepository = bookRepository;
         this.emailService = emailService;
     }
 
-    public void addBook(DBook DBook) {
-        DBookRepository.save(DBook);
+    public void addBook(DBook book) {
+        bookRepository.save(book);
     }
 
     public int findNumberOfBooks() {
-        return DBookRepository.findAll().size();
+        return bookRepository.findAll().size();
     }
 
     // other methos with uses EmailService

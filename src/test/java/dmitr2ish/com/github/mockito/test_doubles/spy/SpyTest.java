@@ -44,7 +44,7 @@ class SpyTest {
         //checking that really saved second book
         verify(bookRepository).save(spBook2);
 
-        //checking how much times was called save
+        //checking how many times was called save
         verify(bookRepository, times(0)).save(spBook1);
         verify(bookRepository, times(1)).save(spBook2);
     }

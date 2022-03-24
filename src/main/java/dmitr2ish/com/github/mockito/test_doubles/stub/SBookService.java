@@ -4,14 +4,14 @@ import java.util.List;
 
 public class SBookService {
 
-    private SBookRepository SBookRepository;
+    private final SBookRepository bookRepository;
 
-    public SBookService(SBookRepository SBookRepository) {
-        this.SBookRepository = SBookRepository;
+    public SBookService(SBookRepository bookRepository) {
+        this.bookRepository = bookRepository;
     }
 
     public List<SBook> getNewBooksWithAppliedDiscount(int discountRate, int days) {
-        List<SBook> newBooks = SBookRepository.findNewBooks(days);
+        List<SBook> newBooks = bookRepository.findNewBooks(days);
         //500 apply 10% -> 10% of 500 -> 50 -> 500 - 50 -> 450
         for (SBook book : newBooks) {
             int price = book.getPrice();

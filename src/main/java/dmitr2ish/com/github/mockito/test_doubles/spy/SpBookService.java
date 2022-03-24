@@ -2,7 +2,7 @@ package dmitr2ish.com.github.mockito.test_doubles.spy;
 
 public class SpBookService {
 
-    private SpBookRepository spBookRepository;
+    private final SpBookRepository spBookRepository;
 
     public SpBookService(SpBookRepository spBookRepository) {
         this.spBookRepository = spBookRepository;

@@ -31,7 +31,8 @@ class ExceptionBookServiceTest {
     @Test
     void testTotalPriceOfBooks_3() throws SQLException {
         //init throw exception
-        //when(bookRepository.findAllBooks()).thenThrow(SQLException.class);
+//        when(bookRepository.findAllBooks()).thenThrow(SQLException.class);
+        //BDD style
         given(bookRepository.findAllBooks()).willThrow(SQLException.class);
         assertThrows(DatabaseReadException.class, () -> bookService.getTotalPriceOfBooks());
     }

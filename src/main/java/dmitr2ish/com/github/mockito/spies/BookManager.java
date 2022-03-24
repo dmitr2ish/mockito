@@ -1,7 +1,7 @@
 package dmitr2ish.com.github.mockito.spies;
 
 public class BookManager {
-    private BookService bookService;
+    private final BookService bookService;
 
     public BookManager(BookService bookService) {
         this.bookService = bookService;

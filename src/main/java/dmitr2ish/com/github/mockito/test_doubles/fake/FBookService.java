@@ -2,20 +2,20 @@ package dmitr2ish.com.github.mockito.test_doubles.fake;
 
 public class FBookService {
 
-    private FBookRepository fBookRepository;
+    private final FBookRepository bookRepository;
 
-    public FBookService(FBookRepository fBookRepository) {
-        this.fBookRepository = fBookRepository;
+    public FBookService(FBookRepository bookRepository) {
+        this.bookRepository = bookRepository;
     }
 
     public void addBook(FBook fBook) {
         if (fBook.getPrice() > 400) {
             return;
         }
-        fBookRepository.save(fBook);
+        bookRepository.save(fBook);
     }
 
     public int findNumberOfBooks() {
-        return fBookRepository.findAll().size();
+        return bookRepository.findAll().size();
     }
 }
